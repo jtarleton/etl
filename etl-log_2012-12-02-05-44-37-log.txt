@@ -1,0 +1,16 @@
+2012-12-02 05:44:37 Log Started
+2012-12-02 05:44:37 Filtering to runlevel: 1 to 999
+2012-12-02 05:44:37 Found 4 class(es)
+2012-12-02 05:44:37 ....job-001-setup.php
+2012-12-02 05:44:37 ....job-002-wppost.php
+2012-12-02 05:44:37 ....job-003-wpcomment.php
+2012-12-02 05:44:37 ....job-004-wpterm.php
+2012-12-02 05:44:37 Beginning execution
+2012-12-02 05:44:37 ..Class file:job-001-setup.php
+2012-12-02 05:44:37 ..Classname: *setup*  Runlevel:1
+2012-12-02 05:44:37 ...instantiating class
+2012-12-02 05:44:37 ...calling PROC
+2012-12-02 05:44:37 ..Class file:job-002-wppost.php
+2012-12-02 05:44:37 ..Classname: *wppost*  Runlevel:2
+2012-12-02 05:44:37 ...instantiating class
+2012-12-02 05:44:37 ...calling PROC

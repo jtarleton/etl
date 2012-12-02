@@ -1,0 +1,10 @@
+2012-12-02 05:19:01 Log Started
+2012-12-02 05:19:01 Filtering to runlevel: 1 to 999
+2012-12-02 05:19:01 Found 1 class(es)
+2012-12-02 05:19:01 ....job-001-setup.php
+2012-12-02 05:19:01 Beginning execution
+2012-12-02 05:19:01 ..Class file:job-001-setup.php
+2012-12-02 05:19:01 ..Classname: *setup*  Runlevel:1
+2012-12-02 05:19:01 ...instantiating class
+2012-12-02 05:19:01 ...calling PROC
+2012-12-02 05:19:01 Normal termination
