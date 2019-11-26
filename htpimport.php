@@ -44,7 +44,7 @@ $argv = $_SERVER['argv'];
 
 
 require_once( dirname(__FILE__) .'/Db.class.php' );
-require_once('/var/privateconfig.inc.php');
+require_once('/var/www/htpimport/privateconfig.inc.php');
 
 $dsn=sprintf('mysql:host=%s;port=%s;dbname=%s', 
 
@@ -53,9 +53,25 @@ PVTCONFIG_DBHOST,PVTCONFIG_DBPORT,PVTCONFIG_DBNAME
 
 ) ;
 
+$dsn=sprintf('mysql:host=%s;port=%s;dbname=%s',
 
-$mysql1 = $mysql2 = Db::getCon( $dsn,PVTCONFIG_DBUSER,
+PVTCONFIG_DBHOST2,PVTCONFIG_DBPORT2,PVTCONFIG_DBNAME2
+
+
+) ;
+
+
+
+$mysql1 = Db::getCon( $dsn,PVTCONFIG_DBUSER,
 PVTCONFIG_DBPASS);
+
+
+
+
+
+$mysql2 = Db::getCon( $dsn2,PVTCONFIG_DBUSER2,
+PVTCONFIG_DBPASS2);
+
 
 
 //
@@ -69,10 +85,9 @@ $options = array('connect'=>true,
 				'db'=>PVTCONFIG_MONGODBNAME);
 
 
-$mongo_server= new Mongo($constring, $options);
+$dsn_sqlite = 'sqlite::memory:';
+$sqlite= Db::getSqliteCon($dsn_sqlite);
 
-$mongo = $mongo_server->selectDB( sprintf('%s', PVTCONFIG_MONGODBNAME) );
-MongoCursor::$timeout = -1;
 
 
 

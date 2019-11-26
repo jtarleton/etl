@@ -1,0 +1,9 @@
+<?php 
+define(PVTCONFIG_DBHOST,);
+define(PVTCONFIG_DBPORT,);
+define(PVTCONFIG_DBNAME,);
+define(PVTCONFIG_DBPASS);
+
+
+
+
