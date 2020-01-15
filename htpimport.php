@@ -44,7 +44,7 @@ $argv = $_SERVER['argv'];
 
 
 require_once( dirname(__FILE__) .'/Db.class.php' );
-require_once('/var/www/htpimport/privateconfig.inc.php');
+require_once(dirname(__FILE__) .'/privateconfig.inc.php');
 
 $dsn=sprintf('mysql:host=%s;port=%s;dbname=%s', 
 
@@ -53,14 +53,19 @@ PVTCONFIG_DBHOST,PVTCONFIG_DBPORT,PVTCONFIG_DBNAME
 
 ) ;
 
-$dsn=sprintf('mysql:host=%s;port=%s;dbname=%s',
+$dsn2=sprintf('mysql:host=%s;port=%s;dbname=%s',
 
 PVTCONFIG_DBHOST2,PVTCONFIG_DBPORT2,PVTCONFIG_DBNAME2
 
 
 ) ;
 
+$dsn3=sprintf('mysql:host=%s;port=%s;dbname=%s',
 
+PVTCONFIG_DBHOST3,PVTCONFIG_DBPORT3,PVTCONFIG_DBNAME3
+
+
+) ;
 
 $mysql1 = Db::getCon( $dsn,PVTCONFIG_DBUSER,
 PVTCONFIG_DBPASS);
@@ -73,17 +78,20 @@ $mysql2 = Db::getCon( $dsn2,PVTCONFIG_DBUSER2,
 PVTCONFIG_DBPASS2);
 
 
+$mysql3 = Db::getCon( $dsn3,PVTCONFIG_DBUSER3,
+PVTCONFIG_DBPASS3);
+
 
 //
 // Mongo staging
-//
+/*
 $constring = 'mongodb://'.PVTCONFIG_MONGOHOST.':'.PVTCONFIG_MONGOPORT;
 $options = array('connect'=>true,
 				'timeout'=>10000,
 				'username'=>PVTCONFIG_MONGOUSER,
 				'password'=>PVTCONFIG_MONGOPASS,
 				'db'=>PVTCONFIG_MONGODBNAME);
-
+*/
 
 $dsn_sqlite = 'sqlite::memory:';
 $sqlite= Db::getSqliteCon($dsn_sqlite);
@@ -196,15 +204,15 @@ foreach( $classes as $k=>$v )
 
 	include( $v );
 
-	WriteLog('...instantiating class');
+	WriteLog('...instantiating job type ' . $t);
 
 	$thisetl = new $t;
 
-	WriteLog('...calling PROC');
+	WriteLog('.....calling PROC');
 
 	try
 	{
-		$thisetl->Proc( $mysql1, $mongo, $mysql2 );
+		$thisetl->Proc( $mysql1, $mysql2,$mysql3  );
 	}
 	catch( Exception $e )
 	{
@@ -258,7 +266,7 @@ function StartLog()
 {
 	global $logname, $logfp, $LOGPATH;
 
-	$logname = $LOGPATH.'etl-log_'.date("Y-m-d-H-i-s").'-log.txt';
+	$logname = __DIR__ .'/logs/htpimport-log_'.date("Y-m-d-H-i-s").'-log.txt';
 
 	$logfp = fopen( $logname, 'a' );
 
