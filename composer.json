@@ -1,0 +1,7 @@
+{
+    "name": "vagrant/aws_s3_test",
+    "type": "project",
+    "require": {
+        "aws/aws-sdk-php": "^3.133"
+    }
+}

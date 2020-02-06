@@ -2,14 +2,35 @@
 
 class injectnode {
 
-	function Proc($source, $staging, $target) {
-		echo get_class($source);
-		echo get_class($staging);
-		echo get_class($target);
-		for($i=0; $i < 100; $i++) {
-			if ( ($i%10) == 0) echo $i .' ';
-			RestUtils::createNode();
+	function Proc($source, $staging, $target,$aws_resource) {
+		$fvrs = FleetInfo::getAll($source);
+
+		// special_permit
+		$rs = HtpIssuePermits::getAll($source);
+		foreach($rs as $row) {
+		//$row['PermitNo']
+					//$row['CompanyID']
+					//$row['VehicleDescription']
+					//$row['VehiclePlate1']
+				}
+
+
+		
+		$k=0;
+		$curl = curl_init(); 
+		foreach($fvrs as $row) {
+			echo ($k%10) == 0 ? $k .' ' : NULL;
+			RestUtils::createNode($row,$curl);
+				
+
+				$k++;
 		}
-		echo PHP_EOL;
+		curl_close($curl);
+
+
+				echo PHP_EOL;
+			
+			WriteLog('Done with injectnode');
+		
 	}
 }

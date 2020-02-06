@@ -2,11 +2,24 @@
 
 class injecttaxonomyterm {
 	
-	function Proc($source, $staging, $target) {
-		for($k=0; $k < 100; $k++) {
-			if ( ($k%10) == 0) echo $k .' ';
-			RestUtils::createTaxonomyTerm(); 
+	function Proc($source, $staging, $target,$aws_resource) {
+	
+
+	
+
+$curl = curl_init(); 
+		$cors = HtpCompanyProfile::getAll($source);
+		$k=0;
+		foreach($cors as $row) {
+				echo ($k%10) == 0 ? $k .' ' : NULL;
+				RestUtils::createTaxonomyTerm($row,$curl);
+				$k++;
 		}
-		echo PHP_EOL;
+		curl_close($curl);
+
+			echo PHP_EOL;
+		
+
+			WriteLog('Done with injecttaxonomyterm');
 	}
 }
